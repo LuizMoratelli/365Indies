@@ -5,6 +5,7 @@ using UnityEngine;
 public class RangeEnemy : Enemy {
 
     public float stopDistance;
+    public float sightDistance;
     private float attackTime;
     public Transform shotPoint;
     public GameObject arrowPrefab;
@@ -20,16 +21,17 @@ public class RangeEnemy : Enemy {
                 Flip ();
             }
 
-            if (Vector2.Distance(transform.position, player.position) > stopDistance) {
+            float distanceBtwPlayer = Vector2.Distance(transform.position, player.position);
+
+            if (distanceBtwPlayer > stopDistance && distanceBtwPlayer < sightDistance) {
                 transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
             }
-        }
 
-        if (Time.time >= attackTime) {
-            attackTime = Time.time + timeBtwAttacks;
-
-            if (player != null) {
-                RangedAttack();
+            if (distanceBtwPlayer < sightDistance) {
+                if (Time.time >= attackTime) {
+                    attackTime = Time.time + timeBtwAttacks;
+                    RangedAttack();
+                }
             }
         }
 	}

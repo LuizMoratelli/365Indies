@@ -29,9 +29,8 @@ public class Arrow : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        Destroy(this.gameObject);
-
         if (collision.tag == "Player") {
+            Destroy(this.gameObject);
             collision.GetComponent<Player>().TakeDamage(damage);
         }
     }
