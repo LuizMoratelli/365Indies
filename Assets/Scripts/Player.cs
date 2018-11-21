@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     public float jumpForce;
     private bool isGrounded;
     public int health;
-    private bool isLeft;
+    public bool isLeft;
 
     [Header("Componentes")]
     private Rigidbody2D _rigidbody;
